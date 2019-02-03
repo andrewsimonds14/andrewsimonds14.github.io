@@ -3,7 +3,9 @@ $('#fin').on('click', function(e) {
   var choices = $("input[type='radio']:checked").map(function(i, radio) {
     return $(radio).val();
   }).toArray();
-
+  fetch('https://localhost/relaxnation', {method: 'POST', body: JSON.stringify(choices)}).then(res => {
+    const spotifyId = res.body;
+  })
   var mood = 0; //Mood indexing: Happy - 3, Mellow - 2, Angry - 1, Sad - 0.
 
   if (choices.length >=4) {
