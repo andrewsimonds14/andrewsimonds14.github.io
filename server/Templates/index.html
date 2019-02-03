@@ -166,4 +166,11 @@
             }).catch(err => console.log(err))
           </script>
 
+          <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+               <script>
+                 axios.get("http://localhost:5000/quiz").then(function(res) {
+                   console.log(res.data)
+                 }).catch(err => console.log(err))
+               </script>
+
     </html>

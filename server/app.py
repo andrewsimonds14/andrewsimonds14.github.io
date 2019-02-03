@@ -1,21 +1,28 @@
 import requests
-from flask import Flask
+from flask import Flask, request
+
 app = Flask(__name__)
+
+mood = None
+@app.route('/quiz', methods=['POST'])
+def quiz():
+    if request.method == 'POST':
+        key = request.get_json()
+        print (key)
+        mood = key
+    return key
 
 @app.route("/relaxnation/")#, method='POST')
 def home():
 
     return requests.get('http://andrewsimonds14.github.io/').content
 
-#@app.route("/relaxnation/quiz.html/")
-#def quiz():
-#    return requests.get('http://andrewsimonds14.github.io/quiz.html').content
-
 @app.route("/post")
 def post():
     return "TEST"
 
-"""!/usr/bin/env python
+#key = quiz()
+
 # coding: utf-8
 
 # In[14]:
@@ -35,63 +42,22 @@ from spotify_api_client import search, search_all, get
 classifier = joblib.load("best_classifier.joblib")
 
 
-# In[15]:
+
+#Accept a genre from the website, return a song ID that will interest the listener
+
+#import necessary libraries
+from sklearn import tree
+from sklearn.externals import joblib
+import pandas as pd
+import numpy as np
+import random
+from spotify_api_client import search, search_all, get
+
+#import the trained classifier
+classifier = joblib.load("best_classifier.joblib")
 
 
-# Read the CSVs
-
-filenames = ['train_data0.csv', 'train_data1.csv', 'train_data2.csv', 'train_data3.csv', 'train_data4.csv']
-dataframes = []
-
-for f in filenames:
-    dataframes.append(pd.read_csv(f)) #now have cvs's as df's in a list
-
-#merge into one dataframe
-df_train = pd.concat(dataframes, axis = 0, ignore_index = True)
-
-df_test = pd.read_csv('test_data0.csv')
-
-csv_loc = '/Users/Jill/Documents/QMIND_Music_jpnb/'
-#export the data to the csv
-export_csv = df_train.to_csv (f'{csv_loc}master_data.csv', index = None, header=True)
-
-
-# In[16]:
-
-
-# Relevant columns for features and labels
-fields = ['speechiness', 'instrumentalness', 'key', 'time signature', 'acousticness',
-                    'danceability', 'energy', 'loudness', 'tempo']
-label_field = 'genre'
-
-# Reading features and labels from the dataframe
-train_features = df_train.loc[:, fields].values
-train_labels = df_train.loc[:, label_field].values
-
-test_features = df_test.loc[:, fields].values
-test_labels = df_test.loc[:, label_field].values
-
-#create & train the decision tree
-clf = tree.DecisionTreeClassifier() #importing the decision tree classifier
-clf = clf.fit(train_features, train_labels) #create learning algorithm
-
-
-# In[17]:
-
-
-#loop over every song, predict, compare to real value, keep track of accuracy
-score = 0
-for i, feature in enumerate(test_features):
-    result = clf.predict([feature])
-
-    if (result == test_labels[i]):
-        score += 1
-
-accuracy = (score/len(test_features))*100
-print(f'Accuracy of tree: {accuracy}')
-
-
-# In[30]:
+# In[33]:
 
 
 #use clf2 to accept a genre as input, check the new songs playlist
@@ -99,16 +65,27 @@ print(f'Accuracy of tree: {accuracy}')
 
 def get_track(genre, tree):
     genre = str(genre)
-    pl = 'new music friday'
+    proceed = True
+    pl_list = ['new music friday', 'singled out', 'new music friday uk',
+               'new music friday canada', 'new music friday au']
+    rand_int = random.randint(0,4)
+    #goes to 'new music friday' playlist which is updated by spotify
+    print(rand_int)
+    print(f"the playlist: {pl_list[rand_int]}")
 
-    playlist_id = search(pl, 'playlist') #returns id of first search result in a string
-    #print('playlist id:', playlist_id)
-    playlist_data = get(f'v1/playlists/{playlist_id}/tracks')
+    playlist_id = search(pl_list[rand_int], 'playlist') #returns id of first search result in a string
+    playlist_data = get(f'v1/playlists/{playlist_id}/tracks') #array of song data
 
-    for n in range(100):
+    num_array = np.linspace(0,98, 99)
+    int_array = [ int(x) for x in num_array]
+
+    while proceed == True:
+
+        index = random.randint(0, len(int_array)-1)
+        n = int_array[index]
+        print(index, n)
 
         track_id = playlist_data['items'][n]['track']['id']
-        #print('track_id', track_id)
         try:
             track_data = get(f'v1/audio-features/{track_id}')
 
@@ -132,16 +109,26 @@ def get_track(genre, tree):
             result = 'invalid'
             #print(result)
 
+        int_array = np.delete(int_array, index)
+        print(result, track_id)
+
         if result == genre:
-            return track_id
+            print("hello")
+            return f'https://open.spotify.com/embed/track/{track_id}'
             break
 
 
-# In[31]:
+# In[34]:
 
 
-print(get_track('happy', clf))
+track = get_track(mood, classifier)
+quiz = open("quiz.html").read().format(track=track)
 
 
 # In[ ]:
-"""
+
+
+
+
+
+# In[ ]:

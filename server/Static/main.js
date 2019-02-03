@@ -1,12 +1,15 @@
+console.log("MAIN JS")
+
 $('#fin').on('click', function(e) {
   // gather all checked radio-button values
   var choices = $("input[type='radio']:checked").map(function(i, radio) {
     return $(radio).val();
   }).toArray();
-  fetch('https://localhost/relaxnation', {method: 'POST', body: JSON.stringify(choices)}).then(res => {
+  fetch('http://localhost/quiz', {method: 'POST', body: JSON.stringify(choices)}).then(res => {
     const spotifyId = res.body;
   })
-  var mood = 0; //Mood indexing: Happy - 3, Mellow - 2, Angry - 1, Sad - 0.
+  var mood = ["happy", "calm", "angry", "sad"];
+  var key;
 
   if (choices.length >=4) {
     $('button[type=calculate]').css("display", "none");
@@ -17,25 +20,30 @@ $('#fin').on('click', function(e) {
     }
     if (count > 18) {
       $('#happy').css("display", "block");
-      mood = 3;
+      key = mood[0];
     }
-    else if (count > 12) {
+    else if (count > 14) {
       $('#mellow').css("display", "block");
-      mood = 2;
+      key = mood[1];
     }
-    else if (count > 6) {
+    else if (count > 9) {
       $('#angry').css("display", "block");
-      mood = 1;
+      key = mood[2];
     }
     else {
       $('#sad').css("display", "block");
-      mood = 0;
+      key = mood[3];
     }
   }
+  $.ajax({
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            url: "http://localhost:5000/quiz",
+            traditional: "true",
+            data: JSON.stringify({key}),
+            dataType: "json"
+            });
 
-  else {
-    $('#error').css("display", "block");
-  }
 });
 
 $("input[type='radio']").on('change', function (e) {
