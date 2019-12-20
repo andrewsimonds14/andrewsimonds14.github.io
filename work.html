@@ -14,8 +14,8 @@
     <link href="assets/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" type="text/css" rel="stylesheet">
-    <link href="assets/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -43,55 +43,59 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="work.html">Projects</a></li>
+            <li class="active"><a href="work.html">Projects</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
 
-	<div id="headerwrap">
+	<div id="workwrap">
 	    <div class="container">
 			<div class="row">
 				<div class="col-lg-6 col-lg-offset-3">
-					<h4>HELLO , MY NAME IS</h4>
-					<h1 style="font-size:80px;">ANDREW SIMONDS</h1>
-					<h4>COMPUTER ENGINEERING STUDENT</h4>
+					<h1>MY PROJECTS</h1>
+					<h4>Individual and team efforts</h4>
 				</div>
 			</div><! --/row -->
 	    </div> <!-- /container -->
-	</div><! --/headerwrap -->
+	</div><! --/workwrap -->
 
 	<section id="works"></section>
 	<div class="container">
 		<div class="row centered mt mb">
-			<h1>My Portfolio</h1>
+			<div class="col-lg-8 col-lg-offset-2">
+				<h4>RUBIK'S CUBE SOLVER</h4>
+				<p></p>
+			</div>
+			<div class="col-lg-10 col-lg-offset-1 mt">
+				<img class="img-responsive" src="assets/img/pr01.jpg">
+				<br>
+			</div>
 
-			<div class="col-lg-4 col-md-4 col-sm-4 gallery">
-				<a href="work.html"><img src="assets/img/portfolio/rubiks.png" class="img-responsive"></a>
+      <div class="col-lg-8 col-lg-offset-2">
+        <p></p>
+				<h4>FLAP-PY BIRD</h4>
+				<p></p>
 			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4 gallery">
-				<a href="work.html"><img src="assets/img/portfolio/flappy.png" class="img-responsive"></a>
+			<div class="col-lg-10 col-lg-offset-1 mt">
+				<img class="img-responsive" src="assets/img/pr01.jpg">
+				<br>
 			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4 gallery">
-				<a href="work.html"><img src="assets/img/portfolio/iceberg.png" class="img-responsive"></a>
+
+      <div class="col-lg-8 col-lg-offset-2">
+        <p></p>
+				<h4>NHL REBOUND PREDICTION</h4>
+        <h3>Synopsis</h3>
+				<p>With goalies being so skilled in the NHL, one of the best ways to score a goal comes from a second chance on a rebound into a high danger area of the ice.  Our team is currently working on developing a tool to accurately predict where a rebound will be directed after a shot.  The tool will be used to train players to shoot in certain locations to produce the highest scoring chance following the shot.
+          The team plans on training a model using sample data consisting of various inputs surrounding a rebound occurrence, such as shot location, and event following shot.  We are currently working on parsing through the vast amount of data points to extract relevant features to accurately train a model.  The plan for the final output is to be able to display a spray chart for likelihood of rebound angle by selecting a shot location on a top-down display of a rink.</p>
 			</div>
-      <!--
-			<div class="col-lg-4 col-md-4 col-sm-4 gallery">
-				<a href="work.html"><img src="assets/img/portfolio/folio04.png" class="img-responsive"></a>
+			<div class="col-lg-10 col-lg-offset-1 mt">
+				<img class="img centered" src="assets/img/GUIcomingSoon.png">
+				<br>
 			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4 gallery">
-				<a href="work.html"><img src="assets/img/portfolio/folio05.png" class="img-responsive"></a>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4 gallery">
-				<a href="work.html"><img src="assets/img/portfolio/folio06.png" class="img-responsive"></a>
-			</div>
-    -->
-      <div class="col-lg-10 col-lg-offset-1 mt">
-        <img class="centered" src="assets/img/comingSoon.png">
-      </div>
 
 		</div><! --/row -->
 	</div><! --/container -->
@@ -99,7 +103,7 @@
 	<div id="social">
 		<div class="container">
 			<div class="row centered">
-				<div class="col-lg-3">
+        <div class="col-lg-3">
 					<a href="https://github.com/andrewsimonds14"><i class="fa fa-github"></i></a>
 				</div>
 				<div class="col-lg-3">
@@ -111,6 +115,7 @@
         <div class="col-lg-3">
 					<a href="./assets/Andrew_Simonds_Resume.pdf"><i class="fa fa-file"></i></a>
 				</div>
+
 			</div><! --/row -->
 		</div><! --/container -->
 	</div><! --/social -->
@@ -119,7 +124,7 @@
 		<div class="container">
 			<div class="row centered">
 				<div class="col-lg-4">
-					<p><b>Computer Engineering Student</b></p>
+          <p><b>Computer Engineering Student</b></p>
 				</div>
 
 				<div class="col-lg-4">
@@ -128,7 +133,9 @@
 				<div class="col-lg-4">
 					<p>andrew.simonds@queensu.ca</p>
 				</div>
+
 			</div>
+
 		</div>
 	</div><! --/footerwrap -->
 
